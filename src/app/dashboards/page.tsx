@@ -15,13 +15,13 @@ export default function DashboardHome() {
 
   // LE GARDIEN ET RÉCUPÉRATION DU NOM
   useEffect(() => {
-    const authStatus = localStorage.getItem("isLoggedIn");
+    const authStatus = sessionStorage.getItem("isLoggedIn");
     
     if (authStatus !== "true") {
       router.push('/auth/login');
     } else {
       // On récupère l'email sauvegardé lors du login
-      const storedEmail = localStorage.getItem("userEmail");
+      const storedEmail = sessionStorage.getItem("userEmail");
       
       if (storedEmail) {
         // On coupe l'email au niveau du "@" pour récupérer la première partie

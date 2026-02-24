@@ -12,14 +12,14 @@ export default function Acceuil() {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    const authStatus = localStorage.getItem("isLoggedIn");
+    const authStatus = sessionStorage.getItem("isLoggedIn");
     if (authStatus === "true") {
       setIsConnected(true);
     }
   }, []);
 
   const handleProtectedNavigation = (destination: string) => {
-    const authStatus = localStorage.getItem("isLoggedIn");
+    const authStatus = sessionStorage.getItem("isLoggedIn");
     if (authStatus === "true") {
       router.push('/dashboards');
     } else {

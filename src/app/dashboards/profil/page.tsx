@@ -23,7 +23,7 @@ export default function ProfilPage() {
 
   // RÉCUPÉRATION DE L'EMAIL AU CHARGEMENT
   useEffect(() => {
-    const storedEmail = localStorage.getItem("userEmail");
+    const storedEmail = sessionStorage.getItem("userEmail");
     
     if (storedEmail) {
       // On crée un pseudo avec la partie avant le @

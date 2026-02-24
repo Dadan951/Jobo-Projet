@@ -57,7 +57,7 @@ export default function DashboardCoutellerie() {
 
   // --- LE GARDIEN DE SÉCURITÉ ---
   useEffect(() => {
-    const authStatus = localStorage.getItem("isLoggedIn");
+    const authStatus = sessionStorage.getItem("isLoggedIn");
     
     if (authStatus !== "true") {
       // Si pas connecté, redirection immédiate vers le login

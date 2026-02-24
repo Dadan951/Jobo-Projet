@@ -73,8 +73,21 @@ const Sidebar = () => {
           href="/auth/login"
           className="flex items-center gap-3 px-4 py-3 text-rose-400/70 hover:bg-rose-500/10 rounded-xl transition-all mt-4"
         >
+          {/* LE BOUTON DÉCONNEXION CORRIGÉ EST ICI 👇 */}
+        <Link 
+          href="/auth/login"
+          onClick={() => {
+            // On vide totalement la mémoire du navigateur au clic
+            sessionStorage.removeItem("isLoggedIn");
+            sessionStorage.removeItem("userEmail");
+            sessionStorage.removeItem("isLoggedIn");
+            sessionStorage.removeItem("userEmail");
+          }}
+          className="flex items-center gap-3 px-4 py-3 text-rose-400/70 hover:bg-rose-500/10 rounded-xl transition-all mt-4"
+        >
           <LogOut size={18} />
           <span className="text-sm font-medium">Déconnexion</span>
+        </Link>
         </Link>
       </div>
     </div>

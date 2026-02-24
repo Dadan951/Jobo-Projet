@@ -13,9 +13,9 @@ export default function LoginPage() {
     e.preventDefault();
     
     // 1. On simule la connexion dans le navigateur
-    localStorage.setItem("isLoggedIn", "true");
+    sessionStorage.setItem("isLoggedIn", "true");
     // 2. On sauvegarde l'email tapé par l'utilisateur
-    localStorage.setItem("userEmail", email);
+    sessionStorage.setItem("userEmail", email);
     
     // 3. On redirige vers le dashboard
     router.push('/dashboards');

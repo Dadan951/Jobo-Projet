@@ -12,7 +12,7 @@ export default function Acceuil() {
 
   // 1. On vérifie l'état au chargement pour l'affichage visuel du bouton
   useEffect(() => {
-    const authStatus = localStorage.getItem("isLoggedIn");
+    const authStatus = sessionStorage.getItem("isLoggedIn");
     if (authStatus === "true") {
       setIsConnected(true);
     }
@@ -20,7 +20,7 @@ export default function Acceuil() {
 
   // 2. Fonction de sécurité qui contrôle l'accès au clic
   const handleProtectedNavigation = (destination: string) => {
-    const authStatus = localStorage.getItem("isLoggedIn");
+    const authStatus = sessionStorage.getItem("isLoggedIn");
 
     if (authStatus === "true") {
       router.push(destination);
