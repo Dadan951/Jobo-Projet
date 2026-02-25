@@ -1,13 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { LogIn } from "lucide-react";
+import { LogIn, LayoutDashboard } from "lucide-react";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const [isConnected, setIsConnected] = useState(false);
+
+  // Vérification de la connexion au chargement de la navbar
+  useEffect(() => {
+    const authStatus = sessionStorage.getItem("isLoggedIn");
+    if (authStatus === "true") {
+      setIsConnected(true);
+    }
+  }, []);
 
   // On masque la Navbar si l'utilisateur est dans le dashboard
   const isDashboard = pathname?.startsWith("/dashboards");
@@ -23,7 +32,6 @@ const Navbar = () => {
         {/* GAUCHE : LOGO + NOM DU SITE */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-110">
-            {/* Utilisation de ton logo présent dans public/logo-jobo.png */}
             <Image 
               src="/logo-jobo.png" 
               alt="Logo Jobo" 
@@ -36,15 +44,25 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* DROITE : BOUTON SE CONNECTER */}
+        {/* DROITE : BOUTON INTELLIGENT (SE CONNECTER / MON DASHBOARD) */}
         <div className="flex items-center gap-6">
-          <Link 
-            href="/auth/login" 
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600/10 text-blue-400 border border-blue-500/20 font-bold text-sm transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
-          >
-            <LogIn size={18} />
-            Se connecter
-          </Link>
+          {isConnected ? (
+            <Link 
+              href="/dashboards" 
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.4)] font-bold text-sm transition-all duration-300 hover:bg-blue-500 hover:scale-105"
+            >
+              <LayoutDashboard size={18} />
+              Mon dashboard
+            </Link>
+          ) : (
+            <Link 
+              href="/auth/login" 
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600/10 text-blue-400 border border-blue-500/20 font-bold text-sm transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
+            >
+              <LogIn size={18} />
+              Se connecter
+            </Link>
+          )}
         </div>
       </div>
 

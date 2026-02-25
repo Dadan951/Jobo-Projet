@@ -11,6 +11,7 @@ export default function Acceuil() {
   const router = useRouter();
   const [isConnected, setIsConnected] = useState(false);
 
+  // Vérification de la session au chargement
   useEffect(() => {
     const authStatus = sessionStorage.getItem("isLoggedIn");
     if (authStatus === "true") {
@@ -21,7 +22,7 @@ export default function Acceuil() {
   const handleProtectedNavigation = (destination: string) => {
     const authStatus = sessionStorage.getItem("isLoggedIn");
     if (authStatus === "true") {
-      router.push('/dashboards');
+      router.push(destination);
     } else {
       router.push('/auth/login');
     }
@@ -58,11 +59,16 @@ export default function Acceuil() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+              {/* BOUTON PRINCIPAL CORRIGÉ ICI 👇 */}
               <button 
                 onClick={() => handleProtectedNavigation('/dashboards')}
                 className="flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold uppercase tracking-widest transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] hover:shadow-[0_0_40px_rgba(37,99,235,0.6)] hover:-translate-y-1"
               >
-                {isConnected ? <><LayoutDashboard size={20} /> Accéder au Dashboard</> : <><LogIn size={20} /> Se connecter</>}
+                {isConnected ? (
+                  <><LayoutDashboard size={20} /> Mon dashboard</>
+                ) : (
+                  <><LogIn size={20} /> Se connecter</>
+                )}
               </button>
             </div>
           </div>
@@ -141,11 +147,13 @@ export default function Acceuil() {
         <div className="relative bg-gradient-to-br from-blue-900/40 to-purple-900/40 border border-blue-500/20 rounded-[3rem] p-12 text-center overflow-hidden">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
           <h2 className="text-4xl font-black text-white mb-6 relative z-10 tracking-tight">Prêt à explorer les données ?</h2>
+          
+          {/* BOUTON DU BAS CORRIGÉ ICI 👇 */}
           <button 
             onClick={() => handleProtectedNavigation('/dashboards')}
             className="relative z-10 inline-flex items-center gap-3 px-8 py-4 bg-white text-black hover:bg-slate-200 rounded-2xl font-black uppercase tracking-widest transition-all"
           >
-            {isConnected ? "Ouvrir l'interface" : "Démarrer maintenant"} <ArrowRight size={20} />
+            {isConnected ? "Mon dashboard" : "Se connecter"} <ArrowRight size={20} />
           </button>
         </div>
 
