@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { 
   LayoutDashboard,
   User, 
-  Settings, 
   LogOut, 
   Scissors, 
   Gem, 
@@ -29,7 +28,6 @@ const Sidebar = () => {
     <div className="flex flex-col h-full bg-[#0b0f1a]/80 backdrop-blur-md border-r border-white/5">
       {/* SECTION LOGO */}
       <div className="p-8">
-        {/* On change le href ici pour pointer vers "/" */}
         <Link href="/" className="group">
           <h1 className="text-xl font-black tracking-tighter text-white group-hover:text-blue-400 transition-colors">
             JOBO<span className="text-blue-500">.</span>ANALYTICS
@@ -69,17 +67,11 @@ const Sidebar = () => {
           <User size={18} />
           <span className="text-sm font-medium">Mon Profil</span>
         </Link>
-        <Link 
-          href="/auth/login"
-          className="flex items-center gap-3 px-4 py-3 text-rose-400/70 hover:bg-rose-500/10 rounded-xl transition-all mt-4"
-        >
-          {/* LE BOUTON DÉCONNEXION CORRIGÉ EST ICI 👇 */}
+
+        {/* SECTION DÉCONNEXION NETTOYÉE (Un seul Link) */}
         <Link 
           href="/auth/login"
           onClick={() => {
-            // On vide totalement la mémoire du navigateur au clic
-            sessionStorage.removeItem("isLoggedIn");
-            sessionStorage.removeItem("userEmail");
             sessionStorage.removeItem("isLoggedIn");
             sessionStorage.removeItem("userEmail");
           }}
@@ -87,7 +79,6 @@ const Sidebar = () => {
         >
           <LogOut size={18} />
           <span className="text-sm font-medium">Déconnexion</span>
-        </Link>
         </Link>
       </div>
     </div>
